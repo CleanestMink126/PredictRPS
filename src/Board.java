@@ -32,25 +32,20 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-public class Board extends JPanel implements MouseListener{
-	 private final int B_WIDTH = 350;
-	    private final int B_HEIGHT = 350;
-	    private final int INITIAL_X = -40;
-	    private final int INITIAL_Y = -40;    
-	    private final int INITIAL_DELAY = 100;
-	    private final int PERIOD_INTERVAL = 25;
-    
-	    
-	    private final int DELAY = 25;
-	    
-	    private Timer timer;
+public class Board extends JPanel{
+	
+     
+	
 	    private int x, y;
 	    double size = 1;
-	
+	    
 	    int numextension = 100;
 	    Choose chooseRPS = null;
+	    boolean choosemenu;
+	    Fight go;
+	
 	    
-	    public Board(){
+	Board(){
 		
 		initBoard();
 		
@@ -59,63 +54,9 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	public void initBoard(){
+		choosemenu = true;
+		addMouseListener(mouse);
 		
-		addMouseListener(new MouseAdapter(){
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			 	x = e.getX();
-			 	y = e.getY();
-		        if( x > chooseRPS.translaterockx &&  x < chooseRPS.translaterockx + chooseRPS.rockwidth  && y > chooseRPS.translaterocky && y < chooseRPS.translaterocky + chooseRPS.rockheight){
-		        	chooseRPS.tr.translate(1000, 1000);
-		        }
-		        
-		        
-		        if( x > chooseRPS.translatepaperx &&  x < chooseRPS.translatepaperx + chooseRPS.paperwidth  && y > chooseRPS.translatepapery && y < chooseRPS.translatepapery + chooseRPS.paperheight){
-		        	chooseRPS.tp.translate(1000, 1000);
-		        }
-		        if( x > chooseRPS.translatescissorsx &&  x < chooseRPS.translatescissorsx + chooseRPS.scissorswidth  && y > chooseRPS.translatescissorsy && y < chooseRPS.translatescissorsy + chooseRPS.scissorsheight){
-		        	chooseRPS.ts.translate(1000, 1000);
-		        }
-		       repaint();
-		        
-		    }
-		 	
-		 
-
-
-			@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			
-		}
-
-			@Override
-		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			
-		}
-
-			@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-		
-			
-		}
-
-			@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		 
-			
-			
-			
-			
-			
-		});
 		chooseRPS = new Choose();
 		
 		setBackground(Color.BLACK);
@@ -129,55 +70,79 @@ public class Board extends JPanel implements MouseListener{
 	 public void paintComponent(Graphics g) {
 
 	        super.paintComponent(g);
-	        chooseRPS.draw(g);
+	        if(choosemenu){
+	        	chooseRPS.draw(g);
+	        }else{
+	        	go.draw(g);
+	        }
+	        
 	 }
 
-	
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 @Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	    
 	 
 	
+	
+	MouseAdapter mouse = new MouseAdapter(){
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+		 	
+			if(choosemenu){
+				x = e.getX();
+			 	y = e.getY();
+		        if( x > chooseRPS.translaterockx &&  x < chooseRPS.translaterockx + chooseRPS.rockwidth  && y > chooseRPS.translaterocky && y < chooseRPS.translaterocky + chooseRPS.rockheight){
+		        	go = new Fight(2);
+		        	choosemenu = false;
+		        }
+		        
+		        
+		        if( x > chooseRPS.translatepaperx &&  x < chooseRPS.translatepaperx + chooseRPS.paperwidth  && y > chooseRPS.translatepapery && y < chooseRPS.translatepapery + chooseRPS.paperheight){
+		        	go = new Fight(3);
+		        	choosemenu = false;
+		        }
+		        if( x > chooseRPS.translatescissorsx &&  x < chooseRPS.translatescissorsx + chooseRPS.scissorswidth  && y > chooseRPS.translatescissorsy && y < chooseRPS.translatescissorsy + chooseRPS.scissorsheight){
+		        	go = new Fight(4);
+		        	choosemenu = false;
+		        }
+		      
+			}else{
+				choosemenu = true;
+			}
+			repaint();
+	        
+	    }
+	 	
+	 
 
+	
+			@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			
+		}
+	
+			@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			
+		}
+	
+			@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+		
+			
+		}
+	
+			@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}	
+	};
 
 	/*
 	@Override
@@ -217,4 +182,5 @@ public class Board extends JPanel implements MouseListener{
         }
     }
     */
+	
 }

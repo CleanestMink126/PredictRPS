@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Choose extends JPanel {
+public class Fight extends JPanel {
 	BufferedImage rockpng = null;
 	BufferedImage scissorspng = null;
 	BufferedImage paperpng = null;
@@ -34,9 +34,9 @@ public class Choose extends JPanel {
 	
 	double translaterockx = 200;
 	double translaterocky = 450;
-	double translatepaperx = 450;
+	double translatepaperx = 200;
 	double translatepapery = 450;
-	double translatescissorsx = 600;
+	double translatescissorsx = 200;
 	double translatescissorsy = 450;
 	
 	double rockheight;
@@ -45,16 +45,15 @@ public class Choose extends JPanel {
 	double paperwidth;
 	double scissorsheight;
 	double scissorswidth;
+	
+	int choice;
+	int computerchoice;
+
+
+	Fight(int choice){
 		
-
-
-	Choose(){
-		tr.scale(resize2,resize2);
-		tr.translate(translaterockx/resize2, translaterocky/resize2);
-		tp.scale(resize2,resize2);
-		tp.translate(translatepaperx/resize2, translatepapery/resize2);
-		ts.scale(resize1,resize1);
-		ts.translate(translatescissorsx/resize1, translatescissorsy/resize1);
+		this.choice = choice;
+		
 		
 		try {
 		    scissorspng = ImageIO.read(new File("C:\\Users\\gsteelman\\Desktop\\Pursuits\\Eclipse\\PredictRPS\\PredictRPS\\Art\\scissors.png"));
@@ -70,6 +69,7 @@ public class Choose extends JPanel {
 		    paperpng = ImageIO.read(new File("C:\\Users\\gsteelman\\Desktop\\Pursuits\\Eclipse\\PredictRPS\\PredictRPS\\Art\\paper.png"));
 		} catch (IOException e) {
 		}
+		
 		rockheight = rockpng.getHeight() * resize2;
 		rockwidth = rockpng.getWidth() * resize2;
 		paperheight = paperpng.getHeight() * resize2;
@@ -80,19 +80,81 @@ public class Choose extends JPanel {
 	}
 	
 	public void draw(Graphics g){
+		tr.scale(resize2,resize2);
+		tr.translate(translaterockx/resize2, translaterocky/resize2);
+		
+		tp.scale(resize2,resize2);
+		tp.translate(translatepaperx/resize2, translatepapery/resize2);
+		
+		ts.scale(resize1,resize1);
+		ts.translate(translatescissorsx/resize1, translatescissorsy/resize1);
+		
+		
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
 		                RenderingHints.VALUE_RENDER_QUALITY);
+		if(choice == 2){
+			g2d.drawImage(rockpng, tr, null);
+		}else if(choice == 3){
+			g2d.drawImage(paperpng, tp, null);
+		}else if (choice == 4){
+			ts.rotate(3.1415,scissorspng.getWidth()/2,scissorspng.getHeight()/2);
+			//ts.translate(scissorswidth,scissorsheight);
+			g2d.drawImage(scissorspng, ts, null);
+		}
 		
-		g2d.drawImage(rockpng, tr, null);
-		g2d.drawImage(paperpng, tp, null);
-		g2d.drawImage(scissorspng, ts, null);
-		g2d.setColor(Color.WHITE);
-		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-		g2d.drawString("CHOOSE", 400, 100);
+		double rand = 3 * Math.random();
+		if (rand < 1){
+			computerchoice = 2;
+		}
+		if (rand> 1 &&  rand < 2){
+			computerchoice= 3;
+		}
+		if (rand > 2){
+			computerchoice = 4;
+		}
+		
+		if(computerchoice == 2){
+			tr.translate(500/resize2, 0);
+			g2d.drawImage(rockpng, tr, null);
+		}else if(computerchoice == 3){
+			tp.translate(500/resize2, 0);
+			g2d.drawImage(paperpng, tp, null);
+		}else if (computerchoice == 4){
+			if (choice == 4){
+				ts.rotate(3.1415,scissorspng.getWidth()/2,scissorspng.getHeight()/2);
+			}
+			ts.translate(500/resize1, 0);
+			
+			//ts.translate(scissorswidth,scissorsheight);
+			g2d.drawImage(scissorspng, ts, null);
+		}
+		
+		if (choice == computerchoice){
+			g2d.setColor(Color.WHITE);
+			g2d.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+			g2d.drawString("TIE", 400, 100);
+		}else if((choice > computerchoice || (choice == 2 && computerchoice == 4)) && !(choice == 4 && computerchoice == 2)){
+			g2d.setColor(Color.GREEN);
+			g2d.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+			g2d.drawString("WIN", 400, 100);
+		}else if(choice < computerchoice || (choice == 4 && computerchoice == 2)){
+			g2d.setColor(Color.RED);
+			g2d.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+			g2d.drawString("LOSE", 400, 100);
+		}
+		
+	
+
+
+
+		
+		
+		
+		
 	
 	}
 	
