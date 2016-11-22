@@ -43,6 +43,8 @@ public class Board extends JPanel{
 	    Choose chooseRPS = null;
 	    boolean choosemenu;
 	    Fight go;
+	    History currenthist;
+	    int[] saveans = new int[2];
 	
 	    
 	Board(){
@@ -59,6 +61,7 @@ public class Board extends JPanel{
 		
 		chooseRPS = new Choose();
 		
+		currenthist = new History();
 		setBackground(Color.BLACK);
 		
 		//timer = new Timer(DELAY,this);
@@ -68,13 +71,16 @@ public class Board extends JPanel{
 	}
 	
 	 public void paintComponent(Graphics g) {
-
+		 	
 	        super.paintComponent(g);
 	        if(choosemenu){
 	        	chooseRPS.draw(g);
 	        }else{
-	        	go.draw(g);
+	        	saveans = go.draw(g);
+	        	currenthist.update(saveans[0],saveans[1]);
 	        }
+	        
+	        currenthist.draw(g);
 	        
 	 }
 

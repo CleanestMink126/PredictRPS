@@ -79,7 +79,7 @@ public class Fight extends JPanel {
 		
 	}
 	
-	public void draw(Graphics g){
+	public int[] draw(Graphics g){
 		tr.scale(resize2,resize2);
 		tr.translate(translaterockx/resize2, translaterocky/resize2);
 		
@@ -149,9 +149,9 @@ public class Fight extends JPanel {
 		
 	
 
+		int[] answers = {computerchoice,choice};
 
-
-		
+		return answers;
 		
 		
 		
