@@ -85,7 +85,7 @@ public class HeavyLifting {
 		
 		
 		if (pastinput.size() > 3){
-			int y = pastinput.get(pastinput.size() - 1);
+		
 			int ym1 = pastinput.get(pastinput.size() - 2);
 			int ym2 = pastinput.get(pastinput.size() - 3);
 			int ym3 = pastinput.get(pastinput.size() - 4);
@@ -496,7 +496,130 @@ public class HeavyLifting {
 	}
 	
 	
-	
+	public double chanceW(){
+		int one = winLast.get(winLast.size()-1);
+		int two = tieLast.get(winLast.size()-1);
+		int three = loseLast.get(winLast.size()-1);
+		
+		
+		int ym1 = pastinput.get(pastinput.size() - 1);
+		int ym2 = pastinput.get(pastinput.size() - 2);
+		int ym3 = pastinput.get(pastinput.size() - 3);
+		
+		int countW = 0;
+		
+		if (ym2 == ym1){
+			
+			
+		}else if((ym2 > ym1 || (ym2 == 2 && ym1 == 4)) && !(ym2 == 4 && ym1 == 2)){
+			countW++;
+		}else if(ym2 < ym1 || (ym2 == 4 && ym1 == 2)){
+			
+		}	
+		if (ym3 == ym1){
+			
+			
+		}else if((ym3 > ym1 || (ym3 == 2 && ym1 == 4)) && !(ym3 == 4 && ym1 == 2)){
+			countW++;
+		}else if(ym3 < ym1 || (ym3 == 4 && ym1 == 2)){
+			
+		}
+		
+		int four = countW;
+		
+		
+		
+		
+		int[] m = {one, two, three, four};
+		
+		double determine = -thetaW[0] * m[0] + -thetaW[1] * m[1] + -thetaW[2] * m[2] + - thetaW[3] * m[3]; 
+	    System.out.println(1 / (1 + Math.exp(determine)));
+		return 1 / (1 + Math.exp(determine));
+	}
+	public double chanceT(){
+		int one = winLast.get(winLast.size()-1);
+		int two = tieLast.get(winLast.size()-1);
+		int three = loseLast.get(winLast.size()-1);
+		
+		
+		int ym1 = pastinput.get(pastinput.size() - 1);
+		int ym2 = pastinput.get(pastinput.size() - 2);
+		int ym3 = pastinput.get(pastinput.size() - 3);
+		
+		int countT = 1;
+		
+		if (ym2 == ym1){
+			countT++;
+			
+		}else if((ym2 > ym1 || (ym2 == 2 && ym1 == 4)) && !(ym2 == 4 && ym1 == 2)){
+			
+		}else if(ym2 < ym1 || (ym2 == 4 && ym1 == 2)){
+			
+		}	
+		if (ym3 == ym1){
+			countT++;
+			
+		}else if((ym3 > ym1 || (ym3 == 2 && ym1 == 4)) && !(ym3 == 4 && ym1 == 2)){
+			
+		}else if(ym3 < ym1 || (ym3 == 4 && ym1 == 2)){
+			
+		}
+		
+		int four = countT;
+		
+		
+		
+		
+		int[] m = {one, two, three, four};
+		
+		double determine = -thetaT[0] * m[0] + -thetaT[1] * m[1] + -thetaT[2] * m[2] + - thetaT[3] * m[3]; 
+	    System.out.println(1 / (1 + Math.exp(determine)));
+		return 1 / (1 + Math.exp(determine));
+	}
+	public double chanceL(){
+		int one = winLast.get(winLast.size()-1);
+		int two = tieLast.get(winLast.size()-1);
+		int three = loseLast.get(winLast.size()-1);
+		
+		
+		int ym1 = pastinput.get(pastinput.size() - 1);
+		int ym2 = pastinput.get(pastinput.size() - 2);
+		int ym3 = pastinput.get(pastinput.size() - 3);
+		
+		int countL = 1;
+		
+		if (ym2 == ym1){
+			
+			
+		}else if((ym2 > ym1 || (ym2 == 2 && ym1 == 4)) && !(ym2 == 4 && ym1 == 2)){
+			
+		}else if(ym2 < ym1 || (ym2 == 4 && ym1 == 2)){
+			countL++;
+		}	
+		if (ym3 == ym1){
+			
+			
+		}else if((ym3 > ym1 || (ym3 == 2 && ym1 == 4)) && !(ym3 == 4 && ym1 == 2)){
+			
+		}else if(ym3 < ym1 || (ym3 == 4 && ym1 == 2)){
+			countL++;
+		}
+		
+		int four = countL;
+		
+		
+		
+		
+		int[] m = {one, two, three, four};
+		
+		double determine = -thetaL[0] * m[0] + -thetaL[1] * m[1] + -thetaL[2] * m[2] + - thetaL[3] * m[3]; 
+	    System.out.println(1 / (1 + Math.exp(determine)));
+		return 1 / (1 + Math.exp(determine));
+	}
 	
 	
 }
+
+
+
+

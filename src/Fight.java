@@ -108,21 +108,6 @@ public class Fight extends JPanel {
 		
 		
 		
-		
-		double rand = 3 * Math.random();
-		if (rand < 1){
-			computerchoice = 2;
-		}
-		if (rand> 1 &&  rand < 2){
-			computerchoice= 3;
-		}
-		if (rand > 2){
-			computerchoice = 4;
-		}
-		
-		
-		
-		
 		if(computerchoice == 2){
 			tr.translate(500/resize2, 0);
 			g2d.drawImage(rockpng, tr, null);
@@ -162,6 +147,35 @@ public class Fight extends JPanel {
 		
 		
 	
+	}
+	public void setChoice(int x,int past){
+		//yeah im just subtracting one which is the same as adding one to just skip straight to the beating answer
+		if (x == 1){
+			past -= 1;
+			if (past ==1){
+				past = 4;
+			}
+		}else if(x == 0){
+			past += 1;
+			if (past == 5){
+				past = 2;
+			}
+		}else if(x == -1){
+			//nothing because past is what I want
+		}
+		computerchoice = past;
+	}
+	public void setrandom(){
+		double rand = 3 * Math.random();
+		if (rand < 1){
+			computerchoice = 2;
+		}
+		if (rand> 1 &&  rand < 2){
+			computerchoice= 3;
+		}
+		if (rand > 2){
+			computerchoice = 4;
+		}
 	}
 	
 	

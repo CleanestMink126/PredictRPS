@@ -79,7 +79,7 @@ public class Board extends JPanel{
 	        if(choosemenu){
 	        	chooseRPS.draw(g);
 	        }else{
-	        	saveans = go.draw(g);
+	        	
 	        	currenthist.update(saveans[0],saveans[1]);
 	        	AI.add(saveans[1], saveans[0]);
 	        	if(AI.ResultW.size() - 2 > 0){
@@ -87,8 +87,22 @@ public class Board extends JPanel{
 	        		AI.crunchW();
 	        		AI.crunchT();
 	        		AI.crunchL();
-	        	
+	        		double W = AI.chanceW();
+	        		double T = AI.chanceT();
+	        		double L = AI.chanceL();
+	        		int past = AI.pastinput.get(AI.pastinput.size()-1);
+	        		if (W > T && W > L){
+	        			go.setChoice(1,past);
+	        		}else if(T>L){
+	        			go.setChoice(0,past);
+	        		}else{
+	        			go.setChoice(-1,past);
+	        		}
+	        		
+	        	}else{
+	        		go.setrandom();
 	        	}
+	        	saveans = go.draw(g);
 	        }
 	        
 	        
