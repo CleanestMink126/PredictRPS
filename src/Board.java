@@ -45,6 +45,7 @@ public class Board extends JPanel{
 	    Fight go;
 	    History currenthist;
 	    int[] saveans = new int[2];
+	    HeavyLifting AI;
 	
 	    
 	Board(){
@@ -62,6 +63,8 @@ public class Board extends JPanel{
 		chooseRPS = new Choose();
 		
 		currenthist = new History();
+		AI = new HeavyLifting();
+		
 		setBackground(Color.BLACK);
 		
 		//timer = new Timer(DELAY,this);
@@ -78,7 +81,16 @@ public class Board extends JPanel{
 	        }else{
 	        	saveans = go.draw(g);
 	        	currenthist.update(saveans[0],saveans[1]);
+	        	AI.add(saveans[1], saveans[0]);
+	        	if(AI.ResultW.size() - 2 > 0){
+	        	
+	        		AI.crunchW();
+	        		AI.crunchT();
+	        		AI.crunchL();
+	        	
+	        	}
 	        }
+	        
 	        
 	        currenthist.draw(g);
 	        

@@ -106,6 +106,9 @@ public class Fight extends JPanel {
 			g2d.drawImage(scissorspng, ts, null);
 		}
 		
+		
+		
+		
 		double rand = 3 * Math.random();
 		if (rand < 1){
 			computerchoice = 2;
@@ -116,6 +119,9 @@ public class Fight extends JPanel {
 		if (rand > 2){
 			computerchoice = 4;
 		}
+		
+		
+		
 		
 		if(computerchoice == 2){
 			tr.translate(500/resize2, 0);
