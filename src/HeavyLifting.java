@@ -233,7 +233,7 @@ public class HeavyLifting {
 			System.out.println(gradient3);
 			System.out.println(gradient4);
 			*/
-			System.out.println(cost);
+			//System.out.println(cost);
 			
 			
 			boolean alltrue = true;
@@ -344,7 +344,7 @@ public class HeavyLifting {
 			System.out.println(gradient3);
 			System.out.println(gradient4);
 			*/
-			System.out.println(cost);
+			//System.out.println(cost);
 			
 			
 			boolean alltrue = true;
@@ -455,7 +455,7 @@ public class HeavyLifting {
 			System.out.println(gradient3);
 			System.out.println(gradient4);
 			*/
-			System.out.println(cost);
+			//System.out.println(cost);
 			
 			
 			boolean alltrue = true;

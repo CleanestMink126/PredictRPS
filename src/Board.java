@@ -80,8 +80,8 @@ public class Board extends JPanel{
 	        	chooseRPS.draw(g);
 	        }else{
 	        	
-	        	currenthist.update(saveans[0],saveans[1]);
-	        	AI.add(saveans[1], saveans[0]);
+	        	
+	        	
 	        	if(AI.ResultW.size() - 2 > 0){
 	        	
 	        		AI.crunchW();
@@ -102,7 +102,10 @@ public class Board extends JPanel{
 	        	}else{
 	        		go.setrandom();
 	        	}
+	        	
 	        	saveans = go.draw(g);
+	        	currenthist.update(saveans[0],saveans[1]);
+	        	AI.add(saveans[1], saveans[0]);
 	        	
 	        }
 	        AI.returnPercent();
