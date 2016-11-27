@@ -103,9 +103,10 @@ public class Board extends JPanel{
 	        		go.setrandom();
 	        	}
 	        	saveans = go.draw(g);
+	        	
 	        }
-	        
-	        
+	        AI.returnPercent();
+	        AI.draw(g);
 	        currenthist.draw(g);
 	        
 	 }

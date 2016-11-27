@@ -1,5 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 public class HeavyLifting {
@@ -18,6 +21,9 @@ public class HeavyLifting {
 	double[] thetaW ;
 	double[] thetaT ;
 	double[] thetaL ;
+	int whoswinning;
+	int timecounter;
+	String percent;
 	
 	//ArrayList<Integer> Overall;
 	
@@ -36,6 +42,9 @@ public class HeavyLifting {
 		thetaW = new double[4];
 		thetaT = new double[4];
 		thetaL = new double[4];
+		whoswinning = 0;
+		timecounter = 0;
+		percent = "NA";
 	}
 	
 	public void add(int i,int r){
@@ -50,6 +59,7 @@ public class HeavyLifting {
 			tieLast.add(0);
 			winLast.add(1);
 			loseLast.add(0);
+			whoswinning += x;
 		}else if(i < r || (i == 4 && r == 2)){
 			x = -1;
 			tieLast.add(0);
@@ -60,6 +70,10 @@ public class HeavyLifting {
 		
 		pastinput.add(i);
 		pastresult.add(x);
+		
+		if (x != 0){
+			timecounter++;
+		}
 		if (pastinput.size() > 1){
 			int y = pastinput.get(pastinput.size() - 1);
 			int yp = pastinput.get(pastinput.size() - 2);
@@ -617,6 +631,29 @@ public class HeavyLifting {
 		return 1 / (1 + Math.exp(determine));
 	}
 	
+	public void returnPercent(){
+		if(timecounter != 0){
+			double p = 100 * (double)whoswinning / (double)timecounter ;
+			
+			percent =  Integer.toString((int)p);
+		}
+		
+	}
+	public void draw(Graphics g){
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING,
+		                RenderingHints.VALUE_RENDER_QUALITY);
+		
+		
+		g2d.setColor(Color.WHITE);
+		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+		g2d.drawString(percent, 100, 100);
+		
+	
+	}
 	
 }
 
